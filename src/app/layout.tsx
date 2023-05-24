@@ -1,13 +1,26 @@
 'use client';
+import { useEffect, useState } from 'react';
 import { Box } from '@/components/Box/Box';
 import { Logo } from '@/components/Logo/Logo';
 import { Layout } from 'antd';
+import { fetchProducts } from '../utils/api';
+import { IProduct } from '@/interfaces/interfaces';
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [products, setProducts] = useState<IProduct[]>([]);
+  // const [order, setOrder] = useState<IOrderItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetchProducts().then(res => {
+      setProducts(res);
+      setIsLoading(false);
+    });
+  }, []);
   return (
     <html lang="en">
       <body>
