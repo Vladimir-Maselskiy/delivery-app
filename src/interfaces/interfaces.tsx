@@ -2,6 +2,7 @@ export interface IProduct {
   _id: string;
   group: string;
   image: string;
+  shop: TShop;
   name: string;
   price: number;
   discount: number;
@@ -13,3 +14,5 @@ export interface IProduct {
   createdAt: string;
   updatedAt: string;
 }
+
+export type TShop = 'mcDonn' | 'CFK' | 'potatoHouse' | 'smachno';

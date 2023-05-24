@@ -1,5 +1,14 @@
+import { IProduct } from '@/interfaces/interfaces';
 import React from 'react';
 
-export const ProductList = () => {
-  return <div>ProductList</div>;
+type TProps = {
+  products: IProduct[];
+};
+
+export const ProductList = ({ products }: TProps) => {
+  return (
+    <>
+      <div>ProductList</div>;
+    </>
+  );
 };

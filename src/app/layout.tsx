@@ -17,7 +17,7 @@ export default function RootLayout({
 
   useEffect(() => {
     fetchProducts().then(res => {
-      setProducts(res);
+      localStorage.setItem('products', JSON.stringify(res));
       setIsLoading(false);
     });
   }, []);

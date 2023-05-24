@@ -10,6 +10,11 @@ const productsSchema = new Schema(
       type: String,
       required: [true, 'Image is required'],
     },
+    shop: {
+      type: String || null,
+      enum: ['income', 'expense'],
+      default: null,
+    },
     name: {
       type: String,
       required: [true, 'Name is required'],
