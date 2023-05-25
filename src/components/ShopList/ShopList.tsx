@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box } from '../Box/Box';
-import { StyledList } from './ShopList.styled';
+import { StyledList, Title } from './ShopList.styled';
 import type { RadioChangeEvent } from 'antd';
 import { Button } from 'antd';
 import { TShop } from '@/interfaces/interfaces';
@@ -44,7 +44,7 @@ export const ShopList = ({ setFilter }: TProps) => {
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center" gridGap={25}>
-      <p>ShopList</p>
+      <Title>Shops</Title>
 
       <StyledList>
         {options?.map(({ label, value, active }) => (
