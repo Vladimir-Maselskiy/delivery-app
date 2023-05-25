@@ -21,7 +21,7 @@ export default function Home() {
     setFilteredProducts(
       products.filter(product => {
         if (filter === null) return product;
-        product.shop === filter;
+        return product.shop === filter;
       })
     );
   }, [filter, products]);
@@ -30,7 +30,7 @@ export default function Home() {
     <main>
       <Box display="flex" padding={40}>
         <Box width="25%" minWidth="25%">
-          <ShopList />
+          <ShopList setFilter={setFilter} />
         </Box>
         <Box width={10} minWidth={10} backgroundColor="var(--accent-color)">
           <></>
