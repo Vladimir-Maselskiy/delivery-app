@@ -3,9 +3,11 @@ import './globals.css';
 import { useEffect, useState } from 'react';
 import { Box } from '@/components/Box/Box';
 import { Logo } from '@/components/Logo/Logo';
-import { Layout } from 'antd';
+import { Layout, Button } from 'antd';
 import { fetchProducts } from '../utils/api';
 import { IProduct } from '@/interfaces/interfaces';
+import { ShoppingCartOutlined } from '@ant-design/icons';
+import Link from 'next/link';
 
 export default function RootLayout({
   children,
@@ -35,6 +37,18 @@ export default function RootLayout({
             minHeight={80}
           >
             <Logo />
+            <Link href="/cart" style={{ marginLeft: 'auto' }}>
+              <Button
+                type="primary"
+                icon={<ShoppingCartOutlined style={{ fontSize: 30 }} />}
+                style={{
+                  width: 60,
+                  height: 60,
+                  backgroundColor: 'var(--accent-color)',
+                  borderRadius: '50%',
+                }}
+              />
+            </Link>
           </Box>
           {/* <NavBar /> */}
         </Layout>
