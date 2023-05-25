@@ -1,4 +1,5 @@
 'use client';
+import './globals.css';
 import { useEffect, useState } from 'react';
 import { Box } from '@/components/Box/Box';
 import { Logo } from '@/components/Logo/Logo';

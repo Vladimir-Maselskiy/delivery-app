@@ -1,4 +1,13 @@
 {
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "/custom.d.ts",
+    ".next/types/**/*.ts",
+    "src/models/product.ts",
+    "/custom.d.ts"
+  ],
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -23,12 +32,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "src/models/product.ts"
-  ],
+
   "exclude": ["node_modules"]
 }
