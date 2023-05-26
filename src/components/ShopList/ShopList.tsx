@@ -13,7 +13,8 @@ type TProps = {
 type TOptions = { label: string; value: TShop | null; active?: boolean }[];
 
 export const ShopList = ({ setFilter }: TProps) => {
-  const data = localStorage.getItem('shopOptiopns');
+  //   const data = localStorage.getItem('shopOptiopns');
+  const data = null;
   const initialOptions: TOptions | null = data
     ? JSON.parse(data)
     : [

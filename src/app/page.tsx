@@ -11,10 +11,10 @@ export default function Home() {
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   const [filter, setFilter] = useState<TShop | null>(null);
 
-  useEffect(() => {
-    const data = localStorage.getItem('products');
-    if (data) setProducts(JSON.parse(data));
-  }, []);
+  // useEffect(() => {
+  //   const data = localStorage.getItem('products');
+  //   if (data) setProducts(JSON.parse(data));
+  // }, []);
 
   useEffect(() => {
     setFilteredProducts(

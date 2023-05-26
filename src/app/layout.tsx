@@ -23,14 +23,14 @@ export default function RootLayout({
 
   useEffect(() => {
     fetchProducts().then(res => {
-      localStorage.setItem('products', JSON.stringify(res));
+      // localStorage.setItem('products', JSON.stringify(res));
       setIsLoading(false);
     });
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
+  // useEffect(() => {
+  //   localStorage.setItem('cart', JSON.stringify(cart));
+  // }, [cart]);
 
   return (
     <html lang="en">
