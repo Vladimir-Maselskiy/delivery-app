@@ -14,5 +14,16 @@ export interface IProduct {
   createdAt: string;
   updatedAt: string;
 }
+export interface ICartItem {
+  product: IProduct;
+  quantity: number;
+}
 
 export type TShop = 'mcDonn' | 'CFK' | 'potatoHouse' | 'smachno';
+
+export interface IUser {
+  name: string;
+  email: string;
+  address: string;
+  phone: string;
+}

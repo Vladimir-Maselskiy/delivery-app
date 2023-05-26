@@ -4,8 +4,7 @@ import { Box } from '@/components/Box/Box';
 import { ProductList } from '@/components/ProductList/ProductList';
 import { ShopList } from '@/components/ShopList/ShopList';
 import { IProduct, TShop } from '@/interfaces/interfaces';
-import { Divider } from 'antd';
-import { width } from 'styled-system';
+import { Divider } from '@/components/Divider/Divider';
 
 export default function Home() {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -28,14 +27,12 @@ export default function Home() {
 
   return (
     <main>
-      <Box display="flex" padding={40}>
-        <Box width="25%" minWidth="25%">
+      <Box display="flex" padding="120px 40px 20px">
+        <Box width={250} minWidth={250}>
           <ShopList setFilter={setFilter} />
         </Box>
-        <Box width={10} minWidth={10} backgroundColor="var(--accent-color)">
-          <></>
-        </Box>
-        <Box>
+        <Divider />
+        <Box marginLeft={25}>
           <ProductList products={filteredProducts} />
         </Box>
       </Box>

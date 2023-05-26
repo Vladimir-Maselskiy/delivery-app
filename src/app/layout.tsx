@@ -3,11 +3,11 @@ import './globals.css';
 import { useEffect, useState } from 'react';
 import { Box } from '@/components/Box/Box';
 import { Logo } from '@/components/Logo/Logo';
-import { Layout, Button } from 'antd';
+import { Layout } from 'antd';
 import { fetchProducts } from '../utils/api';
-import { IProduct } from '@/interfaces/interfaces';
-import { ShoppingCartOutlined } from '@ant-design/icons';
-import Link from 'next/link';
+import { ICartItem, IProduct } from '@/interfaces/interfaces';
+import { CardWrapper } from '@/context/state';
+import { NavCart } from '@/components/NavCart/NavCart';
 
 export default function RootLayout({
   children,
@@ -17,6 +17,9 @@ export default function RootLayout({
   const [products, setProducts] = useState<IProduct[]>([]);
   // const [order, setOrder] = useState<IOrderItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [cart, setCart] = useState<ICartItem[]>(
+    JSON.parse(localStorage.getItem('cart') || '[]')
+  );
 
   useEffect(() => {
     fetchProducts().then(res => {
@@ -24,35 +27,36 @@ export default function RootLayout({
       setIsLoading(false);
     });
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
+
   return (
     <html lang="en">
       <body>
-        <Layout style={{ minWidth: 290, width: '100%' }}>
-          <Box
-            display="flex"
-            position="relative"
-            alignItems="center"
-            justifyContent="space-around"
-            padding="0 20px"
-            minHeight={80}
-          >
-            <Logo />
-            <Link href="/cart" style={{ marginLeft: 'auto' }}>
-              <Button
-                type="primary"
-                icon={<ShoppingCartOutlined style={{ fontSize: 30 }} />}
-                style={{
-                  width: 60,
-                  height: 60,
-                  backgroundColor: 'var(--accent-color)',
-                  borderRadius: '50%',
-                }}
-              />
-            </Link>
-          </Box>
-          {/* <NavBar /> */}
-        </Layout>
-        {children}
+        <CardWrapper>
+          <>
+            <Layout style={{ minWidth: 290, width: '100%' }}>
+              <Box
+                position="fixed"
+                display="flex"
+                alignItems="center"
+                justifyContent="space-around"
+                padding="20px 40px"
+                minHeight={80}
+                zIndex={2}
+                width="100vw"
+                backgroundColor="#ececec"
+              >
+                <Logo />
+                <NavCart />
+              </Box>
+              {/* <NavBar /> */}
+            </Layout>
+            {children}
+          </>
+        </CardWrapper>
       </body>
     </html>
   );
