@@ -1,3 +1,4 @@
+'use-client';
 import React, { useState, useEffect } from 'react';
 import { Box } from '../Box/Box';
 import { StyledList, Title } from './ShopList.styled';

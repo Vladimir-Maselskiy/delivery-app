@@ -1,3 +1,4 @@
+'use-client';
 import { useCartContext } from '@/context/state';
 import { ICartItem } from '@/interfaces/interfaces';
 import React, { useState } from 'react';
