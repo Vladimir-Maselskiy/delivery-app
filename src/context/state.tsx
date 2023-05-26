@@ -1,3 +1,4 @@
+'use client';
 import { ICartItem } from '@/interfaces/interfaces';
 import { createContext, useContext, useState } from 'react';
 

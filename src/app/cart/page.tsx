@@ -10,7 +10,7 @@ export default function Cart() {
         <UserForm />
       </Box>
       <Divider />
-      <Box>
+      <Box flexGrow={2}>
         <CartContent />
       </Box>
     </Box>
