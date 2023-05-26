@@ -18,7 +18,10 @@ export default function RootLayout({
   // const [order, setOrder] = useState<IOrderItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [cart, setCart] = useState<ICartItem[]>(
-    JSON.parse(localStorage.getItem('cart') || '[]')
+    JSON.parse(
+      // localStorage.getItem('cart') ||
+      '[]'
+    )
   );
 
   useEffect(() => {
