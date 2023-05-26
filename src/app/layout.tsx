@@ -17,12 +17,12 @@ export default function RootLayout({
   const [products, setProducts] = useState<IProduct[]>([]);
   // const [order, setOrder] = useState<IOrderItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [cart, setCart] = useState<ICartItem[]>(
-    JSON.parse(
-      // localStorage?.getItem('cart') ||
-      '[]'
-    )
-  );
+  const [cart, setCart] = useState<ICartItem[]>([]);
+
+  useEffect(() => {
+    const data = localStorage?.getItem('cart');
+    if (data) setCart(JSON.parse(data));
+  }, []);
 
   useEffect(() => {
     fetchProducts().then(res => {
@@ -31,9 +31,9 @@ export default function RootLayout({
     });
   }, []);
 
-  // useEffect(() => {
-  //   localStorage.setItem('cart', JSON.stringify(cart));
-  // }, [cart]);
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
   return (
     <html lang="en">
