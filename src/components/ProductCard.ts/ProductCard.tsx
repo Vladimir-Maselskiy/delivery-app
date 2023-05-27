@@ -13,6 +13,10 @@ export const ProductCard = ({ product }: TProps) => {
   const { group, image, name, price, _id } = product;
   const { cart, setCart } = useCartContext();
 
+  useEffect(() => {
+    if (cart.length > 0) localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
+
   const onAddToCartButtonClick = (id: string) => {
     const index = cart.findIndex(item => item.product._id === id);
     if (index === -1) {

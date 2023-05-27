@@ -6,7 +6,7 @@ import { Logo } from '@/components/Logo/Logo';
 import { Layout } from 'antd';
 import { fetchProducts } from '../utils/api';
 import { ICartItem, IProduct } from '@/interfaces/interfaces';
-import { CardWrapper } from '@/context/state';
+import { CardWrapper, useCartContext } from '@/context/state';
 import { NavCart } from '@/components/NavCart/NavCart';
 
 export default function RootLayout({
@@ -17,23 +17,13 @@ export default function RootLayout({
   const [products, setProducts] = useState<IProduct[]>([]);
   // const [order, setOrder] = useState<IOrderItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [cart, setCart] = useState<ICartItem[]>([]);
-
-  useEffect(() => {
-    const data = localStorage?.getItem('cart');
-    if (data) setCart(JSON.parse(data));
-  }, []);
 
   useEffect(() => {
     fetchProducts().then(res => {
-      localStorage?.setItem('products', JSON.stringify(res));
+      localStorage.setItem('products', JSON.stringify(res));
       setIsLoading(false);
     });
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
 
   return (
     <html lang="en">

@@ -1,11 +1,16 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Badge } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { useCartContext } from '@/context/state';
 
 export const NavCart = () => {
-  const { cart } = useCartContext();
+  const { cart, setCart } = useCartContext();
+
+  useEffect(() => {
+    const data = localStorage.getItem('cart');
+    if (data) setCart(JSON.parse(data));
+  }, []);
   const count = cart.reduce((acc, item) => acc + item.quantity, 0);
   return (
     <Link href="/cart" style={{ marginLeft: 'auto' }}>

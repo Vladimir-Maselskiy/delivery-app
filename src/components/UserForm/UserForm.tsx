@@ -16,8 +16,10 @@ export const UserForm = () => {
   const { cart, setCart } = useCartContext();
   const ref = useRef<HTMLButtonElement>(null);
   const router = useRouter();
+
   const onOrderSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (!(e.target instanceof HTMLFormElement)) {
       return;
     }
@@ -87,7 +89,7 @@ export const UserForm = () => {
         ></StyledInput>
       </FieldWrapper>
 
-      <Button type="primary" ref={ref}>
+      <Button type="primary" htmlType="submit" ref={ref}>
         Comfirm
       </Button>
     </StyledForm>
