@@ -41,7 +41,7 @@ export const CartItem = ({ cartItem }: TProps) => {
   const onRemoveItemClick = (id: string) => {
     setCart(prev => {
       const newCart = prev.filter(item => item.product._id !== id);
-      //   localStorage.setItem('cart', JSON.stringify(newCart));
+      localStorage.setItem('cart', JSON.stringify(newCart));
       return newCart;
     });
   };

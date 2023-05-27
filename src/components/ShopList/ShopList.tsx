@@ -10,23 +10,26 @@ type TProps = {
   setFilter: React.Dispatch<React.SetStateAction<TShop | null>>;
 };
 
-type TOptions = { label: string; value: TShop | null; active?: boolean }[];
+type TShopList = { label: string; value: TShop | null; active?: boolean }[];
 
 export const ShopList = ({ setFilter }: TProps) => {
-  //   const data = localStorage.getItem('shopOptiopns');
-  const data = null;
-  const initialOptions: TOptions | null = data
-    ? JSON.parse(data)
-    : [
-        { label: 'All Shops', value: null, active: true },
-        { label: 'Mc Donn', value: 'mcDonn' },
-        { label: 'CFK', value: 'cfk' },
-        { label: 'Potato House', value: 'potatoHouse' },
-        { label: 'Smachno', value: 'smachno' },
-      ];
-
+  const [shopList, setShopList] = useState<TShopList>([]);
   const [shopValue, setShopValue] = useState<TShop | null>(null);
-  const [options, setOptions] = useState(initialOptions);
+  const [options, setOptions] = useState(shopList);
+
+  useEffect(() => {
+    const data = localStorage.getItem('shopOptiopns');
+    const shopList: TShopList = data
+      ? JSON.parse(data)
+      : [
+          { label: 'All Shops', value: null, active: true },
+          { label: 'Mc Donn', value: 'mcDonn' },
+          { label: 'CFK', value: 'cfk' },
+          { label: 'Potato House', value: 'potatoHouse' },
+          { label: 'Smachno', value: 'smachno' },
+        ];
+    setShopList(shopList);
+  }, []);
 
   const onShopButtonClick = (value: TShop | null) => {
     setShopValue(value);
