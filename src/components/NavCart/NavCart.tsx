@@ -13,7 +13,7 @@ export const NavCart = () => {
   }, []);
   const count = cart.reduce((acc, item) => acc + item.quantity, 0);
   return (
-    <Link href="/cart" style={{ marginLeft: 'auto' }}>
+    <Link href="/cart">
       <Badge count={count} offset={[-5, 5]}>
         <Button
           type="primary"

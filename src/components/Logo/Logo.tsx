@@ -6,7 +6,7 @@ import { StyledLogoText } from './Logo.styled';
 
 export const Logo = () => {
   return (
-    <Link href="/" style={{ position: 'absolute', left: '0px', top: '0px' }}>
+    <Link href="/">
       <Image
         src="/logo.png"
         alt="logo"

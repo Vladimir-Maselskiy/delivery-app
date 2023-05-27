@@ -8,6 +8,7 @@ import { fetchProducts } from '../utils/api';
 import { ICartItem, IProduct } from '@/interfaces/interfaces';
 import { CardWrapper, useCartContext } from '@/context/state';
 import { NavCart } from '@/components/NavCart/NavCart';
+import { NavBar } from '@/components/NavBar/NavBar';
 
 export default function RootLayout({
   children,
@@ -35,7 +36,7 @@ export default function RootLayout({
                 position="fixed"
                 display="flex"
                 alignItems="center"
-                justifyContent="space-around"
+                justifyContent="space-between"
                 padding="20px 40px"
                 minHeight={80}
                 zIndex={2}
@@ -43,6 +44,7 @@ export default function RootLayout({
                 backgroundColor="#ececec"
               >
                 <Logo />
+                <NavBar />
                 <NavCart />
               </Box>
               {/* <NavBar /> */}
