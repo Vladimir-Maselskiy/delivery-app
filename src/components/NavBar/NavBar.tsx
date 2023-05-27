@@ -11,12 +11,14 @@ export const NavBar = () => {
       minHeight="35px"
       justifyContent="space-around"
       backgroundColor="var(--accent-color)"
-      padding="5px 20px"
+      //   padding="0px 20px"
+      borderRadius={15}
     >
       <StyledLink href="/">
         <HomeFilled />
       </StyledLink>
-      <StyledLink href="/products">ORDERS</StyledLink>
+      <StyledLink href="/cart">CART</StyledLink>
+      <StyledLink href="/orders">ORDERS</StyledLink>
     </Box>
   );
 };

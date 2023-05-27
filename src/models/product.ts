@@ -1,6 +1,6 @@
 import { Schema, model, models } from 'mongoose';
 
-const productsSchema = new Schema(
+export const productItemSchema = new Schema(
   {
     group: {
       type: String,
@@ -12,7 +12,7 @@ const productsSchema = new Schema(
     },
     shop: {
       type: String || null,
-      enum: ['income', 'expense'],
+      enum: ['mcDonn', 'cfk', 'potatoHouse', 'smachno'],
       default: null,
     },
     name: {
@@ -54,4 +54,4 @@ const productsSchema = new Schema(
   { versionKey: false, timestamps: true }
 );
 
-export const Product = models.products || model('products', productsSchema);
+export const Product = models.products || model('products', productItemSchema);

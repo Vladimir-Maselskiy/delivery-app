@@ -11,6 +11,7 @@ import {
 import { Button } from 'antd';
 import { IUser } from '@/interfaces/interfaces';
 import { getTotalCost } from '@/utils/getTotalCost';
+import { fetchNewOrderToDB } from '@/utils/api';
 
 export const UserForm = () => {
   const { cart, setCart } = useCartContext();
@@ -36,13 +37,13 @@ export const UserForm = () => {
       const val = entry[1] as string;
       user[key] = val;
     }
+    console.log('user', user, 'order', cart);
 
-    const totalCost = getTotalCost(cart);
-    // fetchNewOrderToDB(user, orderItems, totalCost, discount);
-    if (ref.current) ref.current.style.backgroundColor = '#EFD372';
-    setTimeout(() => {
-      router.push('/thank-page');
-    }, 1000);
+    fetchNewOrderToDB(user, cart);
+    if (ref.current) ref.current.style.backgroundColor = 'var(--accent-color)';
+    // setTimeout(() => {
+    //   router.push('/thank-page');
+    // }, 1000);
   };
   return (
     <StyledForm onSubmit={onOrderSubmit} className="cart-content__user-form">

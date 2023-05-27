@@ -37,7 +37,7 @@ export default function RootLayout({
                 display="flex"
                 alignItems="center"
                 justifyContent="space-between"
-                padding="20px 40px"
+                padding="0 40px"
                 minHeight={80}
                 zIndex={2}
                 width="100vw"
@@ -47,7 +47,6 @@ export default function RootLayout({
                 <NavBar />
                 <NavCart />
               </Box>
-              {/* <NavBar /> */}
             </Layout>
             {children}
           </>
