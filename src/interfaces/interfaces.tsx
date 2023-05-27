@@ -19,7 +19,7 @@ export interface ICartItem {
   quantity: number;
 }
 
-export type TShop = 'mcDonn' | 'CFK' | 'potatoHouse' | 'smachno';
+export type TShop = 'mcDonn' | 'cfk' | 'potatoHouse' | 'smachno';
 
 export interface IUser {
   name: string;

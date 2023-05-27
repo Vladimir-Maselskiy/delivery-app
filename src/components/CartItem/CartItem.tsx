@@ -52,8 +52,8 @@ export const CartItem = ({ cartItem }: TProps) => {
         src={`/products${image}`}
         className="cart-item__image"
         alt={name}
-        width={146}
-        height={113}
+        width={125}
+        height={125}
       />
       <Box display="flex" alignItems="center" flexGrow={1} gridGap={20}>
         <Box display="flex" alignItems="center" flexGrow={1}>
