@@ -27,3 +27,21 @@ export const fetchNewOrderToDB = async (user: IUser, order: ICartItem[]) => {
     console.log(error);
   }
 };
+export const fetchUsersOrders = async (user: { email: string }) => {
+  try {
+    const { email } = user;
+    const params = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const res = await fetch(`${API}/orders/${email}`, params).then(res =>
+      res.json()
+    );
+
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};

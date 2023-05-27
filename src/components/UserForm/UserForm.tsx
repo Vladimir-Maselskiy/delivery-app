@@ -20,7 +20,7 @@ export const UserForm = () => {
 
   const onOrderSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    if (cart.length === 0) return;
     if (!(e.target instanceof HTMLFormElement)) {
       return;
     }
@@ -37,17 +37,20 @@ export const UserForm = () => {
       const val = entry[1] as string;
       user[key] = val;
     }
-    console.log('user', user, 'order', cart);
 
-    fetchNewOrderToDB(user, cart);
+    fetchNewOrderToDB(user, cart).then(_ => {
+      setCart([]);
+      localStorage.setItem('cart', JSON.stringify([]));
+    });
     if (ref.current) ref.current.style.backgroundColor = 'var(--accent-color)';
+
     // setTimeout(() => {
     //   router.push('/thank-page');
     // }, 1000);
   };
   return (
-    <StyledForm onSubmit={onOrderSubmit} className="cart-content__user-form">
-      <FieldWrapper className="user-form__name-box">
+    <StyledForm onSubmit={onOrderSubmit}>
+      <FieldWrapper>
         <Label htmlFor="user-name"> Full Name*</Label>
         <StyledInput
           id="user-name"
@@ -58,7 +61,7 @@ export const UserForm = () => {
           required
         ></StyledInput>
       </FieldWrapper>
-      <FieldWrapper className="user-form__email-box">
+      <FieldWrapper>
         <Label htmlFor="user-email"> Your Email*</Label>
         <StyledInput
           id="user-email"
@@ -68,7 +71,7 @@ export const UserForm = () => {
           required
         ></StyledInput>
       </FieldWrapper>
-      <FieldWrapper className="user-form__company-address-box">
+      <FieldWrapper>
         <Label htmlFor="user-company-address">Address*</Label>
         <StyledInput
           id="user-company-address"
@@ -78,7 +81,7 @@ export const UserForm = () => {
           required
         ></StyledInput>
       </FieldWrapper>
-      <FieldWrapper className="user-form__phone-box">
+      <FieldWrapper>
         <Label htmlFor="user-phone">Phone number*</Label>
         <StyledInput
           id="user-phone"

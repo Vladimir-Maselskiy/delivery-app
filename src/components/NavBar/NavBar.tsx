@@ -18,7 +18,7 @@ export const NavBar = () => {
         <HomeFilled />
       </StyledLink>
       <StyledLink href="/cart">CART</StyledLink>
-      <StyledLink href="/orders">ORDERS</StyledLink>
+      <StyledLink href="/orders">HISTORY</StyledLink>
     </Box>
   );
 };
