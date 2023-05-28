@@ -6,7 +6,6 @@ import { Box } from '../Box/Box';
 import Image from 'next/image';
 import {
   OrderItemWrapper,
-  StyledButton,
   StyledLabel,
   StyledNameText,
   StyledPrice,

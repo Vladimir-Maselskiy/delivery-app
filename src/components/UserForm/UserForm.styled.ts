@@ -6,6 +6,7 @@ export const StyledForm = styled.form`
   align-items: center;
   gap: 25px;
   padding: 30px 30px 17px;
+  margin-top: 20px;
   border: 3px solid var(--accent-color);
   border-radius: 30px;
   min-width: 250px;
