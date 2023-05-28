@@ -6,6 +6,7 @@ import { Divider } from 'antd';
 import { CartItem } from '../CartItem/CartItem';
 import { backgroundColor } from 'styled-system';
 import { CartPrice } from '../CartPrice/CartPrice';
+import { OrderItem } from '../OrderItem/OrderItem';
 
 type TProps = {
   historyContent: THistoryContent[];
@@ -28,7 +29,7 @@ export const HistoryContent = ({ historyContent }: TProps) => {
                 <CustomDivider />
                 <Box flexGrow={1}>
                   {order.map(orderItem => (
-                    <CartItem
+                    <OrderItem
                       key={orderItem.product._id}
                       cartItem={orderItem}
                     />
