@@ -37,3 +37,29 @@ export const StyledButton = styled.button`
   margin-left: 15px;
   cursor: pointer;
 `;
+export const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+`;
+
+export const CardItemWrapper = styled.div`
+  display: flex;
+  align-items: 'center';
+  flex-grow: 1;
+  gap: 20px;
+  @media screen and (max-width: 1200px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    flex-grow: 1;
+    & > div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+`;

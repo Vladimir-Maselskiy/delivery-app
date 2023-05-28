@@ -1,18 +1,5 @@
-import { Box } from '@/components/Box/Box';
-import { CartContent } from '@/components/CartContent/CartContent';
-import { Divider } from '@/components/Divider/Divider';
-import { UserForm } from '@/components/UserForm/UserForm';
+import { Cart } from '@/components/Cart/Cart';
 
-export default function Cart() {
-  return (
-    <Box display="flex" padding="120px 40px 20px">
-      <Box width={250} minWidth={250}>
-        <UserForm />
-      </Box>
-      <Divider />
-      <Box flexGrow={2}>
-        <CartContent />
-      </Box>
-    </Box>
-  );
+export default function CartPage() {
+  return <Cart />;
 }

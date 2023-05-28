@@ -5,10 +5,12 @@ import React, { useState } from 'react';
 import { Box } from '../Box/Box';
 import Image from 'next/image';
 import {
+  CardItemWrapper,
   StyledButton,
   StyledLabel,
   StyledNameText,
   StyledPrice,
+  Wrapper,
 } from './CartItem.styled';
 import { InputNumber } from 'antd';
 
@@ -47,7 +49,7 @@ export const CartItem = ({ cartItem }: TProps) => {
   };
 
   return (
-    <Box display="flex" alignItems="center" marginTop={20}>
+    <Wrapper>
       <Image
         src={`/products${image}`}
         className="cart-item__image"
@@ -55,7 +57,7 @@ export const CartItem = ({ cartItem }: TProps) => {
         width={125}
         height={125}
       />
-      <Box display="flex" alignItems="center" flexGrow={1} gridGap={20}>
+      <CardItemWrapper>
         <Box display="flex" alignItems="center" flexGrow={1}>
           <StyledNameText>{name}</StyledNameText>
 
@@ -63,10 +65,15 @@ export const CartItem = ({ cartItem }: TProps) => {
             {price.toFixed(2)}xp
           </StyledPrice>
         </Box>
-        <Box marginLeft="auto" width={350} minWidth={350}>
-          <StyledLabel htmlFor={`${_id}`} className="cart-item__label">
-            Quantity :
-          </StyledLabel>
+        <Box
+          marginLeft="auto"
+          width={350}
+          minWidth={350}
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <StyledLabel htmlFor={`${_id}`}>Quantity :</StyledLabel>
           <InputNumber
             id={`${_id}`}
             value={inputValue}
@@ -83,7 +90,7 @@ export const CartItem = ({ cartItem }: TProps) => {
           />
           <StyledButton onClick={() => onRemoveItemClick(_id)}>X</StyledButton>
         </Box>
-      </Box>
-    </Box>
+      </CardItemWrapper>
+    </Wrapper>
   );
 };

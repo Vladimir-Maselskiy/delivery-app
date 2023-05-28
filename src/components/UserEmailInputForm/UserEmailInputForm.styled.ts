@@ -10,7 +10,7 @@ export const StyledForm = styled.form`
   border-radius: 30px;
   min-width: 250px;
   width: 50%;
-  min-width: 250px;
+  min-width: 400px;
 `;
 
 export const FieldWrapper = styled.div`
