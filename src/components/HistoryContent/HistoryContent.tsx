@@ -5,6 +5,7 @@ import { Divider as CustomDivider } from '../Divider/Divider';
 import { Divider } from 'antd';
 import { CartItem } from '../CartItem/CartItem';
 import { backgroundColor } from 'styled-system';
+import { CartPrice } from '../CartPrice/CartPrice';
 
 type TProps = {
   historyContent: THistoryContent[];
@@ -35,6 +36,10 @@ export const HistoryContent = ({ historyContent }: TProps) => {
                 </Box>
               </Box>
               <Divider style={{ backgroundColor: 'var(--accent-color)' }} />
+              <CartPrice cart={order} />
+              <Divider
+                style={{ backgroundColor: 'var(--accent-color)', height: 5 }}
+              />
             </>
           );
         }
