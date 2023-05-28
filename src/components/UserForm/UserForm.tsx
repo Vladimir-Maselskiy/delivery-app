@@ -44,9 +44,9 @@ export const UserForm = () => {
     });
     if (ref.current) ref.current.style.backgroundColor = 'var(--accent-color)';
 
-    // setTimeout(() => {
-    //   router.push('/thank-page');
-    // }, 1000);
+    setTimeout(() => {
+      router.push('/thank-page');
+    }, 1000);
   };
   return (
     <StyledForm onSubmit={onOrderSubmit}>
