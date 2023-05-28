@@ -4,13 +4,14 @@ import { Button } from 'antd';
 import { Box } from '../Box/Box';
 import { CardWrapper, StyledGroupName } from './ProductCard.styled';
 import { useCartContext } from '@/context/state';
+import { IProductsWithOption } from '../ProductList/ProductList';
 
 type TProps = {
-  product: IProduct;
+  product: IProductsWithOption;
 };
 
 export const ProductCard = ({ product }: TProps) => {
-  const { group, image, name, price, _id } = product;
+  const { group, image, name, price, _id, available } = product;
   const { cart, setCart } = useCartContext();
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export const ProductCard = ({ product }: TProps) => {
     });
   };
   return (
-    <CardWrapper>
+    <CardWrapper available={available}>
       <StyledGroupName>{group}</StyledGroupName>
       <img
         className="product-card__image"
@@ -45,6 +46,7 @@ export const ProductCard = ({ product }: TProps) => {
         type="primary"
         style={{ marginTop: 15, marginLeft: 'auto' }}
         onClick={() => onAddToCartButtonClick(_id)}
+        disabled={!available}
       >
         Add to cart
       </Button>
