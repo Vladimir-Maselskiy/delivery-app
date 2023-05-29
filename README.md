@@ -4,7 +4,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 The Food Delivery app. This App consist several pages such as Home, Cart, Order History and other.
 
-<img width="550" alt="image" src="https://github.com/Vladimir-Maselskiy/delivery-app">
+<img width="550" alt="image" src="https://github.com/Vladimir-Maselskiy/delivery-app/assets/65615017/ec106973-f4a7-4fa3-8e95-4c458294d6da">
 
 ## App Link
 
