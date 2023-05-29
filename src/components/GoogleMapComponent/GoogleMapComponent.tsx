@@ -17,16 +17,22 @@ export const GoogleMapComponent = () => {
     console.log('google.maps.MapMouseEvent', e);
   };
   return (
-    <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}>
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={15}
-        onDblClick={onDblClick}
-      >
-        {/* Child components, such as markers, info windows, etc. */}
-        {/* <Marker position={center}></Marker> */}
-      </GoogleMap>
-    </LoadScript>
+    // <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}>
+    <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={center}
+      zoom={15}
+      onDblClick={onDblClick}
+      options={{
+        zoomControl: false,
+        streetViewControl: false,
+        mapTypeControl: false,
+        fullscreenControl: false,
+      }}
+    >
+      {/* Child components, such as markers, info windows, etc. */}
+      {/* <Marker position={center}></Marker> */}
+    </GoogleMap>
+    // </LoadScript>
   );
 };

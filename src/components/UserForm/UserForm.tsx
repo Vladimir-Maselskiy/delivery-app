@@ -10,7 +10,7 @@ import {
 } from './UserForm.styled';
 import { Button } from 'antd';
 import { IUser } from '@/interfaces/interfaces';
-import { getTotalCost } from '@/utils/getTotalCost';
+import { Autocomplete, LoadScript } from '@react-google-maps/api';
 import { fetchNewOrderToDB } from '@/utils/api';
 
 export const UserForm = () => {
@@ -51,6 +51,18 @@ export const UserForm = () => {
   return (
     <StyledForm onSubmit={onOrderSubmit}>
       <FieldWrapper>
+        <Label htmlFor="user-company-address">Address*</Label>
+        <Autocomplete>
+          <StyledInput
+            id="user-company-address"
+            name="address"
+            type="text"
+            placeholder="your company  address"
+            required
+          ></StyledInput>
+        </Autocomplete>
+      </FieldWrapper>
+      <FieldWrapper>
         <Label htmlFor="user-name"> Full Name*</Label>
         <StyledInput
           id="user-name"
@@ -71,16 +83,7 @@ export const UserForm = () => {
           required
         ></StyledInput>
       </FieldWrapper>
-      <FieldWrapper>
-        <Label htmlFor="user-company-address">Address*</Label>
-        <StyledInput
-          id="user-company-address"
-          name="address"
-          type="text"
-          placeholder="your company  address"
-          required
-        ></StyledInput>
-      </FieldWrapper>
+
       <FieldWrapper>
         <Label htmlFor="user-phone">Phone number*</Label>
         <StyledInput
