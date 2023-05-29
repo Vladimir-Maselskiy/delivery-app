@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useCartContext } from '@/context/state';
 import { useRouter } from 'next/navigation';
 import {
@@ -13,10 +13,23 @@ import { IUser } from '@/interfaces/interfaces';
 import { Autocomplete, LoadScript } from '@react-google-maps/api';
 import { fetchNewOrderToDB } from '@/utils/api';
 
-export const UserForm = () => {
+type TProps = {
+  markerAddress: string;
+};
+
+export const UserForm = ({ markerAddress }: TProps) => {
   const { cart, setCart } = useCartContext();
   const ref = useRef<HTMLButtonElement>(null);
   const router = useRouter();
+  const [inputValue, setInputValue] = useState(markerAddress);
+
+  useEffect(() => {
+    setInputValue(markerAddress);
+  }, [markerAddress]);
+
+  const onChangeAddressInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
 
   const onOrderSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -59,6 +72,8 @@ export const UserForm = () => {
             type="text"
             placeholder="your company  address"
             required
+            value={inputValue}
+            onChange={onChangeAddressInput}
           ></StyledInput>
         </Autocomplete>
       </FieldWrapper>

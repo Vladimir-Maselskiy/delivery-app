@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { Box } from '../Box/Box';
 import { UserForm } from '../UserForm/UserForm';
 import { Divider } from '../Divider/Divider';
@@ -8,17 +8,8 @@ import { Wrapper } from './Cart.styled';
 import { GoogleMapComponent } from '../GoogleMapComponent/GoogleMapComponent';
 import { LoadScript } from '@react-google-maps/api';
 
-const containerStyle = {
-  width: '400px',
-  height: '400px',
-};
-
-const center = {
-  lat: -3.745,
-  lng: -38.523,
-};
-
 export const Cart = () => {
+  const [markerAddress, setMarkerAddress] = useState('');
   return (
     <Wrapper>
       <Box width={250} minWidth={250}>
@@ -26,8 +17,14 @@ export const Cart = () => {
           googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}
           libraries={['places']}
         >
-          <GoogleMapComponent />
-          <UserForm />
+          <GoogleMapComponent setMarkerAddress={setMarkerAddress} />
+          <p style={{ color: 'grey', marginTop: 10 }}>
+            Map usage: <br />
+            - double click on the shortcut will set the marker on the map and
+            geodata in the address field <br />- manual input in the address
+            input field is implemented with address auto-completion
+          </p>
+          <UserForm markerAddress={markerAddress} />
         </LoadScript>
       </Box>
       <Divider />
