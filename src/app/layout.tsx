@@ -37,7 +37,7 @@ export default function RootLayout({
                 display="flex"
                 alignItems="center"
                 justifyContent="space-between"
-                padding="0 40px"
+                padding="0 15px 0 10px"
                 minHeight={80}
                 zIndex={2}
                 width="100vw"

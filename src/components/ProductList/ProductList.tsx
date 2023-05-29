@@ -30,7 +30,6 @@ export const ProductList = ({ products }: TProps) => {
 
   useEffect(() => {
     if (cart.length === 0) {
-      console.log('cart.length', cart.length);
       setProductsWithOption(
         products.map(product => {
           const available = true;
@@ -39,7 +38,6 @@ export const ProductList = ({ products }: TProps) => {
       );
     }
     if (cart.length > 0) {
-      console.log('cart.length', cart.length);
       const availableShop = cart[0].product.shop;
       setProductsWithOption(
         products.map(product => {
@@ -49,7 +47,6 @@ export const ProductList = ({ products }: TProps) => {
       );
     }
   }, [cart.length, products]);
-  console.log('productsWithOption', productsWithOption);
   return (
     <Box display="flex" gridGap={20} flexWrap="wrap" justifyContent="center">
       {productsWithOption.map(product => (
