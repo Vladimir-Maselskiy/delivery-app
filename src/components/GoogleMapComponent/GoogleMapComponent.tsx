@@ -31,7 +31,7 @@ export const GoogleMapComponent = () => {
       }}
     >
       {/* Child components, such as markers, info windows, etc. */}
-      {/* <Marker position={center}></Marker> */}
+      <Marker position={center}></Marker>
     </GoogleMap>
     // </LoadScript>
   );
