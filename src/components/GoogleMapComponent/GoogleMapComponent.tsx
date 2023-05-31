@@ -55,7 +55,7 @@ export const GoogleMapComponent = ({
 
   useEffect(() => {
     if (cart.length === 0) setArrivalTime(null);
-  }, [cart.length]);
+  }, [cart.length, setArrivalTime]);
 
   const directionsCallback = (response: any) => {
     if (response !== null && cart.length !== 0) {

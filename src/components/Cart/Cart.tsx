@@ -35,7 +35,7 @@ export const Cart = () => {
       const origin = shop ? shop.origin : null;
       setOrigin(origin);
     }
-  }, [cart.length]);
+  }, [cart.length, cart]);
 
   useEffect(() => {
     if (!origin) setArrivalTime(null);
