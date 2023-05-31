@@ -6,16 +6,12 @@ import { Divider } from '../Divider/Divider';
 import { ProductList } from '../ProductList/ProductList';
 import { IProduct, TShop } from '@/interfaces/interfaces';
 import { Wrapper } from './Home.styled';
+import { useProductsContext } from '@/context/state';
 
 export const Home = () => {
-  const [products, setProducts] = useState<IProduct[]>([]);
+  const { products } = useProductsContext();
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   const [filter, setFilter] = useState<TShop | null>(null);
-
-  useEffect(() => {
-    const data = localStorage.getItem('products');
-    if (data) setProducts(JSON.parse(data));
-  }, []);
 
   useEffect(() => {
     setFilteredProducts(

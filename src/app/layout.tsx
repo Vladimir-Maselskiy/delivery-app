@@ -3,54 +3,61 @@ import './globals.css';
 import { useEffect, useState } from 'react';
 import { Box } from '@/components/Box/Box';
 import { Logo } from '@/components/Logo/Logo';
-import { Layout } from 'antd';
+import { Layout, Spin } from 'antd';
 import { fetchProducts } from '../utils/api';
-import { ICartItem, IProduct } from '@/interfaces/interfaces';
-import { CardWrapper, useCartContext } from '@/context/state';
+import {
+  CartWrapper,
+  ProductsWrapper,
+  useProductsContext,
+} from '@/context/state';
 import { NavCart } from '@/components/NavCart/NavCart';
 import { NavBar } from '@/components/NavBar/NavBar';
+import { Header } from '@/components/Header/Header';
+import { IProduct } from '@/interfaces/interfaces';
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [products, setProducts] = useState<IProduct[]>([]);
-  // const [order, setOrder] = useState<IOrderItem[]>([]);
+  // const { setProducts } = useProductsContext();
   const [isLoading, setIsLoading] = useState(true);
+  const [products, setProducts] = useState<IProduct[]>([])
 
   useEffect(() => {
-    fetchProducts().then(res => {
-      localStorage.setItem('products', JSON.stringify(res));
-      setIsLoading(false);
-    });
+    fetchProducts()
+      .then(res => {
+        setProducts(res);
+        setIsLoading(false);
+      })
+      .catch(console.log);
   }, []);
 
   return (
     <html lang="en">
       <body>
-        <CardWrapper>
-          <>
-            <Layout style={{ minWidth: 290, width: '100%' }}>
+        <CartWrapper>
+          <ProductsWrapper>
+            {isLoading ? (
               <Box
-                position="fixed"
+                minWidth="100vw"
+                minHeight="100vh"
                 display="flex"
+                justifyContent="center"
                 alignItems="center"
-                justifyContent="space-between"
-                padding="0 15px 0 10px"
-                minHeight={80}
-                zIndex={2}
-                width="100vw"
-                backgroundColor="#ececec"
               >
-                <Logo />
-                <NavBar />
-                <NavCart />
+                <Spin />
               </Box>
-            </Layout>
-            {children}
-          </>
-        </CardWrapper>
+            ) : (
+              <>
+                <Layout style={{ minWidth: 290, width: '100%' }}>
+                  <Header products={products}/>
+                </Layout>
+                {children}
+              </>
+            )}
+          </ProductsWrapper>
+        </CartWrapper>
       </body>
     </html>
   );
