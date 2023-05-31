@@ -39,7 +39,7 @@ export const GoogleMapComponent = ({
         map?.panTo(markerPosition);
       }
     }
-  }, [markerPosition]);
+  }, [markerPosition, map]);
 
   const onDblClick = async (e: google.maps.MapMouseEvent) => {
     e.domEvent.preventDefault();

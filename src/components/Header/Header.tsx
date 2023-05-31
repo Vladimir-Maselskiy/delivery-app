@@ -15,7 +15,7 @@ export const Header = ({ products }: TProps) => {
 
   useEffect(() => {
     setProducts(products);
-  }, [products]);
+  }, [products, setProducts]);
 
   return (
     <Box

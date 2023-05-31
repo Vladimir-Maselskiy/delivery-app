@@ -46,7 +46,7 @@ export const ProductList = ({ products }: TProps) => {
         })
       );
     }
-  }, [cart.length, products]);
+  }, [ products, cart]);
   return (
     <Box display="flex" gridGap={20} flexWrap="wrap" justifyContent="center">
       {productsWithOption.map(product => (

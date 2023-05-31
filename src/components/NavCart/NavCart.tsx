@@ -10,7 +10,7 @@ export const NavCart = () => {
   useEffect(() => {
     const data = localStorage.getItem('cart');
     if (data) setCart(JSON.parse(data));
-  }, []);
+  }, [setCart]);
   const count = cart.reduce((acc, item) => acc + item.quantity, 0);
   return (
     <Link href="/cart">

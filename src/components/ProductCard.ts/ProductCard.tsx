@@ -5,6 +5,7 @@ import { Box } from '../Box/Box';
 import { CardWrapper, StyledGroupName } from './ProductCard.styled';
 import { useCartContext } from '@/context/state';
 import { IProductsWithOption } from '../ProductList/ProductList';
+import Image from 'next/image';
 
 type TProps = {
   product: IProductsWithOption;
@@ -33,7 +34,7 @@ export const ProductCard = ({ product }: TProps) => {
   return (
     <CardWrapper available={available}>
       <StyledGroupName>{group}</StyledGroupName>
-      <img
+      <Image
         className="product-card__image"
         src={`/products${image}`}
         alt={name}

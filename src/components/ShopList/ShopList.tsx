@@ -43,13 +43,13 @@ export const ShopList = ({ setFilter }: TProps) => {
     setFilter(shopValue);
     sessionStorage.setItem('shopValue', JSON.stringify(shopValue));
     if (shopList.length > 0)
-      setShopList(
-        shopList.map(shop => {
+      setShopList(prev =>
+        prev.map(shop => {
           if (shop.value !== shopValue) return { ...shop, active: false };
           return { ...shop, active: true };
         })
       );
-  }, [shopValue]);
+  }, [shopValue, setFilter, shopList.length]);
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center" gridGap={25}>
