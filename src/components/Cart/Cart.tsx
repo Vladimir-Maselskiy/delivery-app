@@ -66,10 +66,11 @@ export const Cart = () => {
             >{`Approximately time: ${arrivalTime}`}</Box>
           )}
           <p style={{ color: 'grey', marginTop: 10 }}>
-            Map usage: <br />
-            - double click on the shortcut will set the marker on the map and
-            geodata in the address field <br />- manual input in the address
-            input field is implemented with address auto-completion
+            Map usage: <br />-{' '}
+            <span style={{ color: '#000' }}>double click</span> on the shortcut
+            will set the marker on the map and geodata in the address field{' '}
+            <br />- manual input in the address input field is implemented with
+            address auto-completion
           </p>
           <UserForm
             markerAddress={markerAddress}
