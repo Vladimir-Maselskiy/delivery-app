@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
   // const { setProducts } = useProductsContext();
   const [isLoading, setIsLoading] = useState(true);
-  const [products, setProducts] = useState<IProduct[]>([])
+  const [products, setProducts] = useState<IProduct[]>([]);
 
   useEffect(() => {
     fetchProducts()
@@ -51,9 +51,9 @@ export default function RootLayout({
             ) : (
               <>
                 <Layout style={{ minWidth: 290, width: '100%' }}>
-                  <Header products={products}/>
+                  <Header products={products} />
+                  {children}
                 </Layout>
-                {children}
               </>
             )}
           </ProductsWrapper>

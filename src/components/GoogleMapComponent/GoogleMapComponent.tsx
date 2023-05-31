@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { GoogleMap, Marker } from '@react-google-maps/api';
+import {
+  GoogleMap,
+  Marker,
+  DirectionsService,
+  DirectionsRenderer,
+} from '@react-google-maps/api';
 
 import Geocode from 'react-geocode';
 import { TMarkerPosition } from '../Cart/Cart';
+import { useCartContext } from '@/context/state';
 
 type TProps = {
   setMarkerAddress: React.Dispatch<React.SetStateAction<string>>;
@@ -10,6 +16,8 @@ type TProps = {
     React.SetStateAction<TMarkerPosition | null>
   >;
   markerPosition: TMarkerPosition | null;
+  origin: TMarkerPosition | null;
+  setArrivalTime: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 Geocode.setApiKey(`${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`!);
@@ -29,8 +37,39 @@ export const GoogleMapComponent = ({
   setMarkerAddress,
   markerPosition,
   setMarkerPosition,
+  origin,
+  setArrivalTime,
 }: TProps) => {
+  const { cart } = useCartContext();
   const [map, setMap] = useState<google.maps.Map | null>(null);
+  const [directions, setDirections] = useState(null);
+
+  const directionsOptions =
+    markerPosition && origin
+      ? {
+          destination: markerPosition,
+          origin: origin,
+          travelMode: google.maps.TravelMode.DRIVING,
+        }
+      : null;
+
+  useEffect(() => {
+    if (cart.length === 0) setArrivalTime(null);
+  }, [cart.length]);
+
+  const directionsCallback = (response: any) => {
+    if (response !== null && cart.length !== 0) {
+      if (response.status === 'OK') {
+        console.log('response', response);
+        setDirections(response);
+        const leg = response.routes[0].legs[0];
+        const arrivalTime = leg.duration.text;
+        setArrivalTime(arrivalTime);
+      } else {
+        console.log('Directions request failed:', response.status);
+      }
+    }
+  };
 
   useEffect(() => {
     if (markerPosition) {
@@ -54,7 +93,6 @@ export const GoogleMapComponent = ({
         );
         const address = response.results[0].formatted_address;
         setMarkerAddress(address);
-        // setMarkerAddress(address);
       } catch (error) {
         console.error('Error retrieving address:', error);
       }
@@ -65,7 +103,6 @@ export const GoogleMapComponent = ({
     setMap(mapInstance);
   };
   return (
-    // <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}>
     <GoogleMap
       onLoad={onGoogleMapLoad}
       mapContainerStyle={containerStyle}
@@ -80,6 +117,15 @@ export const GoogleMapComponent = ({
         disableDoubleClickZoom: true,
       }}
     >
+      {directionsOptions && (
+        <DirectionsService
+          options={directionsOptions}
+          callback={directionsCallback}
+        />
+      )}
+      {directions && directionsOptions && (
+        <DirectionsRenderer directions={directions} />
+      )}
       {markerPosition && <Marker position={markerPosition}></Marker>}
     </GoogleMap>
   );

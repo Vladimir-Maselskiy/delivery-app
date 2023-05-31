@@ -19,15 +19,6 @@ export const ProductList = ({ products }: TProps) => {
     IProductsWithOption[]
   >([]);
 
-  //   useEffect(() => {
-  //     setProductsWithOption(
-  //       products.map(product => {
-  //         const available = true;
-  //         return { ...product, available };
-  //       })
-  //     );
-  //   }, [products]);
-
   useEffect(() => {
     if (cart.length === 0) {
       setProductsWithOption(
@@ -46,7 +37,7 @@ export const ProductList = ({ products }: TProps) => {
         })
       );
     }
-  }, [ products, cart]);
+  }, [products, cart]);
   return (
     <Box display="flex" gridGap={20} flexWrap="wrap" justifyContent="center">
       {productsWithOption.map(product => (

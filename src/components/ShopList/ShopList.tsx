@@ -2,15 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import { Box } from '../Box/Box';
 import { StyledList, Title } from './ShopList.styled';
-import type { RadioChangeEvent } from 'antd';
 import { Button } from 'antd';
-import { TShop } from '@/interfaces/interfaces';
+import { EnvironmentOutlined } from '@ant-design/icons';
+import { TShop, TShopList } from '@/interfaces/interfaces';
+import { getShopList } from '@/utils/getShopList';
 
 type TProps = {
   setFilter: React.Dispatch<React.SetStateAction<TShop | null>>;
 };
-
-type TShopList = { label: string; value: TShop | null; active?: boolean }[];
 
 export const ShopList = ({ setFilter }: TProps) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -22,13 +21,7 @@ export const ShopList = ({ setFilter }: TProps) => {
     const dataShopValue = sessionStorage.getItem('shopValue');
     const shopList: TShopList = dataShopList
       ? JSON.parse(dataShopList)
-      : [
-          { label: 'All Shops', value: null, active: true },
-          { label: 'Mc Donn', value: 'mcDonn' },
-          { label: 'CFK', value: 'cfk' },
-          { label: 'Potato House', value: 'potatoHouse' },
-          { label: 'Smachno', value: 'smachno' },
-        ];
+      : getShopList();
     const shopValue = dataShopValue ? JSON.parse(dataShopValue) : null;
     setShopList(shopList);
     setShopValue(shopValue);
@@ -57,14 +50,22 @@ export const ShopList = ({ setFilter }: TProps) => {
 
       {isLoading ? null : (
         <StyledList>
-          {shopList.map(({ label, value, active }) => (
+          {shopList.map(({ label, value, active, geodata, origin }) => (
             <li key={label}>
               <Button
                 type={active ? 'primary' : 'default'}
-                style={{ width: 120 }}
+                style={{ width: 120, height: 60 }}
                 onClick={() => onShopButtonClick(value as TShop | null)}
               >
-                {label}
+                <Box>
+                  <span>{label}</span>
+                  {origin && (
+                    <Box>
+                      <EnvironmentOutlined />
+                      <span style={{ marginLeft: 10 }}>{geodata}</span>
+                    </Box>
+                  )}
+                </Box>
               </Button>
             </li>
           ))}

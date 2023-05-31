@@ -27,3 +27,11 @@ export interface IUser {
   address: string;
   phone: string;
 }
+
+export type TShopList = {
+  label: string;
+  value: TShop | null;
+  active?: boolean;
+  origin: { lat: number; lng: number } | null;
+  geodata: string | null;
+}[];
