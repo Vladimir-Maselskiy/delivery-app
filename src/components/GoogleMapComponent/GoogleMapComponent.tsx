@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 
 import Geocode from 'react-geocode';
+import { TMarkerPosition } from '../Cart/Cart';
 
 type TProps = {
-    setMarkerAddress : React.Dispatch<React.SetStateAction<string>>
-}
-
-type MarkerPosition = {
-  lat: number;
-  lng: number;
+  setMarkerAddress: React.Dispatch<React.SetStateAction<string>>;
+  setMarkerPosition: React.Dispatch<
+    React.SetStateAction<TMarkerPosition | null>
+  >;
+  markerPosition: TMarkerPosition | null;
 };
 
 Geocode.setApiKey(`${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`!);
@@ -25,10 +25,22 @@ const center = {
   lng: 30.52,
 };
 
-export const GoogleMapComponent = ({setMarkerAddress} : TProps) => {
-  const [markerPosition, setMarkerPosition] = useState<MarkerPosition | null>(
-    null
-  );
+export const GoogleMapComponent = ({
+  setMarkerAddress,
+  markerPosition,
+  setMarkerPosition,
+}: TProps) => {
+  const [map, setMap] = useState<google.maps.Map | null>(null);
+
+  useEffect(() => {
+    if (markerPosition) {
+      const { lat, lng } = markerPosition;
+      if (lat && lng) {
+        map?.panTo(markerPosition);
+      }
+    }
+  }, [markerPosition]);
+
   const onDblClick = async (e: google.maps.MapMouseEvent) => {
     e.domEvent.preventDefault();
     if (e.latLng && e.latLng) {
@@ -48,9 +60,14 @@ export const GoogleMapComponent = ({setMarkerAddress} : TProps) => {
       }
     }
   };
+
+  const onGoogleMapLoad = (mapInstance: google.maps.Map) => {
+    setMap(mapInstance);
+  };
   return (
     // <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}>
     <GoogleMap
+      onLoad={onGoogleMapLoad}
       mapContainerStyle={containerStyle}
       center={center}
       zoom={15}
@@ -63,9 +80,7 @@ export const GoogleMapComponent = ({setMarkerAddress} : TProps) => {
         disableDoubleClickZoom: true,
       }}
     >
-      {/* Child components, such as markers, info windows, etc. */}
       {markerPosition && <Marker position={markerPosition}></Marker>}
     </GoogleMap>
-    // </LoadScript>
   );
 };

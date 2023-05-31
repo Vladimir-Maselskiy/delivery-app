@@ -12,16 +12,24 @@ import { Button } from 'antd';
 import { IUser } from '@/interfaces/interfaces';
 import { Autocomplete, LoadScript } from '@react-google-maps/api';
 import { fetchNewOrderToDB } from '@/utils/api';
+import { TMarkerPosition } from '../Cart/Cart';
 
 type TProps = {
   markerAddress: string;
+  setMarkerPosition: React.Dispatch<
+    React.SetStateAction<TMarkerPosition | null>
+  >;
 };
 
-export const UserForm = ({ markerAddress }: TProps) => {
+export const UserForm = ({ markerAddress, setMarkerPosition }: TProps) => {
   const { cart, setCart } = useCartContext();
   const ref = useRef<HTMLButtonElement>(null);
   const router = useRouter();
   const [inputValue, setInputValue] = useState(markerAddress);
+
+  const autocompleteRef = React.useRef<google.maps.places.Autocomplete | null>(
+    null
+  );
 
   useEffect(() => {
     setInputValue(markerAddress);
@@ -29,6 +37,21 @@ export const UserForm = ({ markerAddress }: TProps) => {
 
   const onChangeAddressInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
+  };
+
+  const onPlaceChanged = () => {
+    if (autocompleteRef.current !== null) {
+      const { geometry, formatted_address } =
+        autocompleteRef.current.getPlace();
+      if (formatted_address) setInputValue(formatted_address);
+      console.log(
+        'autocompleteRef.current.getPlace()',
+        autocompleteRef.current.getPlace()
+      );
+      const lat = geometry?.location?.lat();
+      const lng = geometry?.location?.lng();
+      if (lat && lng) setMarkerPosition({ lat, lng });
+    }
   };
 
   const onOrderSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -65,7 +88,12 @@ export const UserForm = ({ markerAddress }: TProps) => {
     <StyledForm onSubmit={onOrderSubmit}>
       <FieldWrapper>
         <Label htmlFor="user-company-address">Address*</Label>
-        <Autocomplete>
+        <Autocomplete
+          onLoad={autocomplete => {
+            autocompleteRef.current = autocomplete;
+          }}
+          onPlaceChanged={onPlaceChanged}
+        >
           <StyledInput
             id="user-company-address"
             name="address"
